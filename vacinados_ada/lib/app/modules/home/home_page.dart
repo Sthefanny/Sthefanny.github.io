@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_triple/flutter_triple.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import 'home_store.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,30 +16,60 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Counter'),
-      ),
-      body: ScopedBuilder<HomeStore, Exception, int>(
-        store: store,
-        onState: (_, counter) {
-          return Padding(
-            padding: EdgeInsets.all(10),
-            child: Text('$counter'),
-          );
-        },
-        onError: (context, error) => Center(
-          child: Text(
-            'Too many clicks',
-            style: TextStyle(color: Colors.red),
-          ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          store.increment();
-        },
-        child: Icon(Icons.add),
+      backgroundColor: Colors.pink[50],
+      body: Column(
+        children: [
+          _buildTitle(),
+          _buildListButton(),
+        ],
       ),
     );
   }
+
+  Widget _buildTitle() {
+    return Container(
+      margin: EdgeInsets.only(top: 100, bottom: 300),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Vacin',
+            style: GoogleFonts.acme(fontSize: 100, color: Colors.purple, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'ADA',
+            style: GoogleFonts.acme(fontSize: 100, color: Colors.blue, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildListButton() {
+    return ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
+      ),
+      child: Text(
+        'Entrar',
+        style: GoogleFonts.acme(fontSize: 50),
+      ),
+      onPressed: () => Modular.to.navigate('/vacinados'),
+    );
+  }
 }
+
+
+
+
+// return Scaffold(
+//       body: Observer(
+//         builder: (context) => Text('${store.counter}'),
+//       ),
+//       floatingActionButton: FloatingActionButton(
+//         onPressed: () {
+//           store.increment();
+//         },
+//         child: Icon(Icons.add),
+//       ),
+//     );
