@@ -44,4 +44,8 @@ abstract class VacinadosStoreBase with Store {
         .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));
   }
+
+  void deleteUser(String id) {
+    _user.doc(id).delete().then((value) => print("User Deleted")).catchError((error) => print("Failed to delete user: $error"));
+  }
 }

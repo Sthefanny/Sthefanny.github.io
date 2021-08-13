@@ -4,6 +4,7 @@ part 'vacinado_model.g.dart';
 
 @JsonSerializable()
 class VacinadoModel {
+  String? id;
   String name;
   String turn;
   String? vacina;
@@ -11,6 +12,7 @@ class VacinadoModel {
   bool secondDoseTaken;
 
   VacinadoModel({
+    this.id,
     required this.name,
     required this.turn,
     this.vacina,

@@ -19,8 +19,8 @@ class _AddUserPageState extends ModularState<AddUserPage, AddUserStore> {
   var nameTextController = TextEditingController();
   var turnTextController = TextEditingController();
   var vacinaTextController = TextEditingController();
-  bool? firstDose = false;
-  bool? secondDose = false;
+  bool firstDose = false;
+  bool secondDose = false;
 
   @override
   Widget build(BuildContext context) {
@@ -114,10 +114,13 @@ class _AddUserPageState extends ModularState<AddUserPage, AddUserStore> {
       value: firstDose,
       onChanged: (bool? value) {
         setState(() {
-          firstDose = value;
+          firstDose = value!;
         });
       },
-      secondary: const FaIcon(FontAwesomeIcons.syringe),
+      secondary: FaIcon(
+        FontAwesomeIcons.syringe,
+        color: firstDose ? Colors.green : Colors.grey,
+      ),
     );
   }
 
@@ -127,10 +130,13 @@ class _AddUserPageState extends ModularState<AddUserPage, AddUserStore> {
       value: secondDose,
       onChanged: (bool? value) {
         setState(() {
-          secondDose = value;
+          secondDose = value!;
         });
       },
-      secondary: const FaIcon(FontAwesomeIcons.syringe),
+      secondary: FaIcon(
+        FontAwesomeIcons.syringe,
+        color: secondDose ? Colors.green : Colors.grey,
+      ),
     );
   }
 
@@ -143,8 +149,8 @@ class _AddUserPageState extends ModularState<AddUserPage, AddUserStore> {
             name: nameTextController.text,
             turn: turnTextController.text,
             vacina: vacinaTextController.text,
-            firstDoseTaken: firstDose!,
-            secondDoseTaken: secondDose!,
+            firstDoseTaken: firstDose,
+            secondDoseTaken: secondDose,
           );
 
           store.addUser(userModel).then((value) {

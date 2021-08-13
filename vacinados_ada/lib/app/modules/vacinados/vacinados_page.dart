@@ -62,6 +62,8 @@ class _VacinadosPageState extends ModularState<VacinadosPage, VacinadosStore> {
             itemCount: snapData.length,
             itemBuilder: (_, index) {
               var item = VacinadoModel.fromJson(snapData[index].data());
+              item.id = (snapData[index] as QueryDocumentSnapshot).id;
+
               return _buildListItem(item);
             },
           );
@@ -74,37 +76,50 @@ class _VacinadosPageState extends ModularState<VacinadosPage, VacinadosStore> {
 
   Widget _buildListItem(VacinadoModel item) {
     double _width = 30;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 300),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(item.name),
-                  Text(item.turn),
-                ],
-              ),
-              Text(item.vacina ?? ''),
-              Row(
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.syringe,
-                    size: _width,
-                    color: item.firstDoseTaken ? Colors.green : Colors.grey,
-                  ),
-                  FaIcon(
-                    FontAwesomeIcons.syringe,
-                    size: _width,
-                    color: item.secondDoseTaken ? Colors.green : Colors.grey,
-                  ),
-                ],
-              ),
-            ],
+      child: Dismissible(
+        key: Key(item.id!),
+        onDismissed: (direction) {
+          store.deleteUser(item.id!);
+
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${item.name} deletado')));
+        },
+        background: Container(
+          alignment: Alignment.centerRight,
+          child: FaIcon(FontAwesomeIcons.trash),
+        ),
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(item.name),
+                    Text(item.turn),
+                  ],
+                ),
+                Text(item.vacina ?? ''),
+                Row(
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.syringe,
+                      size: _width,
+                      color: item.firstDoseTaken ? Colors.green : Colors.grey,
+                    ),
+                    FaIcon(
+                      FontAwesomeIcons.syringe,
+                      size: _width,
+                      color: item.secondDoseTaken ? Colors.green : Colors.grey,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
