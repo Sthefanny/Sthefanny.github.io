@@ -2,7 +2,8 @@
     package="com.example.vacinados_ada">
    <application
         android:label="vacinados_ada"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
