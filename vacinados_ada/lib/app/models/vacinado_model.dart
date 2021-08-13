@@ -6,12 +6,14 @@ part 'vacinado_model.g.dart';
 class VacinadoModel {
   String name;
   String turn;
+  String? vacina;
   bool firstDoseTaken;
   bool secondDoseTaken;
 
   VacinadoModel({
     required this.name,
     required this.turn,
+    this.vacina,
     this.firstDoseTaken = false,
     this.secondDoseTaken = false,
   });

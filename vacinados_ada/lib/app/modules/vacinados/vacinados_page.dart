@@ -31,36 +31,8 @@ class _VacinadosPageState extends ModularState<VacinadosPage, VacinadosStore> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.purple,
         child: FaIcon(FontAwesomeIcons.plus),
-        onPressed: () => _showDialog,
+        onPressed: () => Modular.to.navigate('/vacinados/addUser'),
       ),
-    );
-  }
-
-  Future<void> _showDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: const <Widget>[
-                Text('This is a demo alert dialog.'),
-                Text('Would you like to approve of this message?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Approve'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
     );
   }
 
@@ -95,7 +67,7 @@ class _VacinadosPageState extends ModularState<VacinadosPage, VacinadosStore> {
           );
         }
 
-        return Text("loading");
+        return Center(child: CircularProgressIndicator(color: Colors.purple));
       },
     );
   }
@@ -117,6 +89,7 @@ class _VacinadosPageState extends ModularState<VacinadosPage, VacinadosStore> {
                   Text(item.turn),
                 ],
               ),
+              Text(item.vacina ?? ''),
               Row(
                 children: [
                   FaIcon(
