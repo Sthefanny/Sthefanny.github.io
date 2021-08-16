@@ -1,6 +1,6 @@
 {
-    "name": "vacinados_ada",
-    "short_name": "vacinados_ada",
+    "name": "cingulo_assessment_web",
+    "short_name": "cingulo_assessment_web",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
