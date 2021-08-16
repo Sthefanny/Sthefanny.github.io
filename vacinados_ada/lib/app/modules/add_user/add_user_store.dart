@@ -23,6 +23,7 @@ abstract class AddUserStoreBase with Store {
         .add({
           'name': user.name,
           'turn': user.turn,
+          'vacina': user.vacina,
           'firstDoseTaken': user.firstDoseTaken,
           'secondDoseTaken': user.secondDoseTaken,
         })
