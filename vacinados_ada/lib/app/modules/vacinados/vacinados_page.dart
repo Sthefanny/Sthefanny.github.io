@@ -55,13 +55,12 @@ class _VacinadosPageState extends ModularState<VacinadosPage, VacinadosStore> {
   Widget _buildTitle() {
     return Container(
       margin: EdgeInsets.all(20),
-      child: Expanded(
-        child: AutoSizeText(
-          'Lista dos vacinados',
-          maxLines: 1,
-          style: GoogleFonts.acme(fontSize: 50, color: Colors.purple),
-          minFontSize: 18,
-        ),
+      child: AutoSizeText(
+        'Lista dos vacinados',
+        maxLines: 1,
+        style: GoogleFonts.acme(fontSize: 50, color: Colors.purple),
+        textAlign: TextAlign.center,
+        minFontSize: 18,
       ),
     );
   }
@@ -164,13 +163,12 @@ class _VacinadosPageState extends ModularState<VacinadosPage, VacinadosStore> {
                   ],
                 ),
                 Expanded(
-                  child: Center(
-                    child: Text(
-                      item.vacina ?? '',
-                      maxLines: 1,
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                  child: Text(
+                    item.vacina ?? '',
+                    maxLines: 1,
+                    softWrap: true,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Row(
