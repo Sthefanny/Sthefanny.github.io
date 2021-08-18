@@ -1,5 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,15 +18,29 @@ class VacinadosPage extends StatefulWidget {
 }
 
 class _VacinadosPageState extends ModularState<VacinadosPage, VacinadosStore> {
+  late Size _size;
+
+  @override
+  void initState() {
+    super.initState();
+    store.getMorningCount();
+    store.getAfternoonCount();
+  }
+
   @override
   Widget build(BuildContext context) {
+    _size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.pink[50],
       body: SafeArea(
         child: Column(
           children: [
             _buildTitle(),
-            _buildList(),
+            _buildTotals(),
+            Expanded(
+              child: _buildList(),
+            ),
           ],
         ),
       ),
@@ -39,9 +55,13 @@ class _VacinadosPageState extends ModularState<VacinadosPage, VacinadosStore> {
   Widget _buildTitle() {
     return Container(
       margin: EdgeInsets.all(20),
-      child: Text(
-        'Lista dos vacinados',
-        style: GoogleFonts.acme(fontSize: 50, color: Colors.purple),
+      child: Expanded(
+        child: AutoSizeText(
+          'Lista dos vacinados',
+          maxLines: 1,
+          style: GoogleFonts.acme(fontSize: 50, color: Colors.purple),
+          minFontSize: 18,
+        ),
       ),
     );
   }
@@ -58,6 +78,7 @@ class _VacinadosPageState extends ModularState<VacinadosPage, VacinadosStore> {
           var snapData = snapshot.data;
 
           return ListView.builder(
+            padding: const EdgeInsets.symmetric(vertical: 10),
             shrinkWrap: true,
             itemCount: snapData.length,
             itemBuilder: (_, index) {
@@ -74,15 +95,54 @@ class _VacinadosPageState extends ModularState<VacinadosPage, VacinadosStore> {
     );
   }
 
+  Widget _buildTotals() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: _size.width * .05),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                children: [
+                  Text('Manhã: '),
+                  Observer(builder: (_) {
+                    return Text('${store.morningCount}');
+                  }),
+                ],
+              ),
+            ),
+          ),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                children: [
+                  Text('Tarde: '),
+                  Observer(builder: (_) {
+                    return Text('${store.afternoonCount}');
+                  }),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildListItem(VacinadoModel item) {
     double _width = 30;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 300),
+      padding: EdgeInsets.symmetric(horizontal: _size.width * .05),
       child: Dismissible(
         key: Key(item.id!),
         onDismissed: (direction) {
           store.deleteUser(item.id!);
+          store.getMorningCount();
+          store.getAfternoonCount();
 
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${item.name} deletado')));
         },
@@ -103,7 +163,16 @@ class _VacinadosPageState extends ModularState<VacinadosPage, VacinadosStore> {
                     Text(item.turn),
                   ],
                 ),
-                Text(item.vacina ?? ''),
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      item.vacina ?? '',
+                      maxLines: 1,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
                 Row(
                   children: [
                     FaIcon(

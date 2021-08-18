@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,13 +17,16 @@ class AddUserPage extends StatefulWidget {
 
 class _AddUserPageState extends ModularState<AddUserPage, AddUserStore> {
   var nameTextController = TextEditingController();
-  var turnTextController = TextEditingController();
   var vacinaTextController = TextEditingController();
   bool firstDose = false;
   bool secondDose = false;
+  String? turn;
+  late Size _size;
 
   @override
   Widget build(BuildContext context) {
+    _size = MediaQuery.of(context).size;
+
     return WillPopScope(
       onWillPop: () async {
         return false;
@@ -31,8 +34,7 @@ class _AddUserPageState extends ModularState<AddUserPage, AddUserStore> {
       child: Scaffold(
         backgroundColor: Colors.pink[50],
         body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: ListView(
             children: [
               _buildTitle(),
               _buildBody(),
@@ -46,16 +48,18 @@ class _AddUserPageState extends ModularState<AddUserPage, AddUserStore> {
   Widget _buildTitle() {
     return Container(
       margin: EdgeInsets.fromLTRB(20, 20, 20, 50),
-      child: Text(
-        'Lista dos vacinados',
+      child: AutoSizeText(
+        'Adicionar na lista',
+        maxLines: 1,
         style: GoogleFonts.acme(fontSize: 50, color: Colors.purple),
+        minFontSize: 18,
       ),
     );
   }
 
   Widget _buildBody() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 300),
+      padding: EdgeInsets.symmetric(horizontal: _size.width * .05),
       child: Column(
         children: [
           _buildName(),
@@ -70,11 +74,24 @@ class _AddUserPageState extends ModularState<AddUserPage, AddUserStore> {
   }
 
   Widget _buildName() {
-    return CupertinoTextField(
-      placeholder: 'Nome',
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(6)),
-      placeholderStyle: TextStyle(color: Colors.black),
+    return TextField(
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.all(10),
+        hintText: 'Nome',
+        hintStyle: TextStyle(color: Colors.black),
+        labelStyle: TextStyle(color: Colors.black),
+        filled: true,
+        fillColor: Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(
+            const Radius.circular(5),
+          ),
+          borderSide: BorderSide(
+            style: BorderStyle.none,
+            width: 0,
+          ),
+        ),
+      ),
       style: TextStyle(color: Colors.black),
       controller: nameTextController,
     );
@@ -83,13 +100,51 @@ class _AddUserPageState extends ModularState<AddUserPage, AddUserStore> {
   Widget _buildTurn() {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
-      child: CupertinoTextField(
-        placeholder: 'Turno',
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(6)),
-        placeholderStyle: TextStyle(color: Colors.black),
-        style: TextStyle(color: Colors.black),
-        controller: turnTextController,
+      child: DropdownButtonFormField<String>(
+        decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(
+                const Radius.circular(5),
+              ),
+              borderSide: BorderSide(
+                style: BorderStyle.none,
+                width: 0,
+              ),
+            ),
+            filled: true,
+            hintStyle: TextStyle(color: Colors.black),
+            hintText: 'Turno',
+            fillColor: Colors.white),
+        value: turn,
+        onChanged: (String? value) {
+          setState(() {
+            turn = value;
+          });
+        },
+        items: [
+          DropdownMenuItem(
+              value: 'Manhã',
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: FaIcon(FontAwesomeIcons.coffee),
+                  ),
+                  Text('Manhã'),
+                ],
+              )),
+          DropdownMenuItem(
+              value: 'Tarde',
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: FaIcon(FontAwesomeIcons.utensils),
+                  ),
+                  Text('Tarde'),
+                ],
+              )),
+        ],
       ),
     );
   }
@@ -97,11 +152,24 @@ class _AddUserPageState extends ModularState<AddUserPage, AddUserStore> {
   Widget _buildVacina() {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      child: CupertinoTextField(
-        placeholder: 'Qual vacina?',
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(6)),
-        placeholderStyle: TextStyle(color: Colors.black),
+      child: TextField(
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(10),
+          hintText: 'Qual vacina?',
+          hintStyle: TextStyle(color: Colors.black),
+          labelStyle: TextStyle(color: Colors.black),
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(5),
+            ),
+            borderSide: BorderSide(
+              style: BorderStyle.none,
+              width: 0,
+            ),
+          ),
+        ),
         style: TextStyle(color: Colors.black),
         controller: vacinaTextController,
       ),
@@ -110,7 +178,7 @@ class _AddUserPageState extends ModularState<AddUserPage, AddUserStore> {
 
   Widget _buildFisrtDose() {
     return CheckboxListTile(
-      title: const Text('Tomou 1ª dose?'),
+      title: Center(child: const Text('Tomou 1ª dose?')),
       value: firstDose,
       onChanged: (bool? value) {
         setState(() {
@@ -126,7 +194,7 @@ class _AddUserPageState extends ModularState<AddUserPage, AddUserStore> {
 
   Widget _buildSecondDose() {
     return CheckboxListTile(
-      title: const Text('Tomou 2ª dose?'),
+      title: Center(child: const Text('Tomou 2ª dose?')),
       value: secondDose,
       onChanged: (bool? value) {
         setState(() {
@@ -147,7 +215,7 @@ class _AddUserPageState extends ModularState<AddUserPage, AddUserStore> {
         onPressed: () {
           var userModel = VacinadoModel(
             name: nameTextController.text,
-            turn: turnTextController.text,
+            turn: turn!,
             vacina: vacinaTextController.text,
             firstDoseTaken: firstDose,
             secondDoseTaken: secondDose,

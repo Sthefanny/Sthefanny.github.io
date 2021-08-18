@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,17 +29,26 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
 
   Widget _buildTitle() {
     return Container(
-      margin: EdgeInsets.only(top: 100, bottom: 300),
+      margin: EdgeInsets.only(top: 100, bottom: 300, left: 20, right: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            'Vacin',
-            style: GoogleFonts.acme(fontSize: 100, color: Colors.purple, fontWeight: FontWeight.bold),
+          Expanded(
+            child: AutoSizeText(
+              'Vacin',
+              textAlign: TextAlign.right,
+              maxLines: 1,
+              style: GoogleFonts.acme(fontSize: 100, color: Colors.purple, fontWeight: FontWeight.bold),
+              minFontSize: 18,
+            ),
           ),
-          Text(
-            'ADA',
-            style: GoogleFonts.acme(fontSize: 100, color: Colors.blue, fontWeight: FontWeight.bold),
+          Expanded(
+            child: AutoSizeText(
+              'ADA',
+              maxLines: 1,
+              style: GoogleFonts.acme(fontSize: 100, color: Colors.blue, fontWeight: FontWeight.bold),
+              minFontSize: 18,
+            ),
           ),
         ],
       ),

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:vacinados_ada/app/models/vacinado_model.dart';
 
@@ -14,6 +14,12 @@ abstract class VacinadosStoreBase with Store {
 
   @observable
   List<QueryDocumentSnapshot> users = <QueryDocumentSnapshot>[];
+
+  @observable
+  int morningCount = 0;
+
+  @observable
+  int afternoonCount = 0;
 
   VacinadosStoreBase(this._db) {
     _user = _db.collection('user');
@@ -31,6 +37,16 @@ abstract class VacinadosStoreBase with Store {
           })
         });
     return users;
+  }
+
+  @action
+  Future<void> getMorningCount() async {
+    await _user.where('turn', isEqualTo: 'Manhã').get().then((value) => morningCount = value.size);
+  }
+
+  @action
+  Future<void> getAfternoonCount() async {
+    await _user.where('turn', isEqualTo: 'Tarde').get().then((value) => afternoonCount = value.size);
   }
 
   Future<void> addUser(VacinadoModel user) {
