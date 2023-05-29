@@ -1,0 +1,46 @@
+name: flutter_resume
+description: A new Flutter project.
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.19.2 <3.0.0"
+
+dependencies:
+  cupertino_icons: ^1.0.5
+  dio: ^5.1.2
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_mobx: ^2.0.6+5
+  flutter_modular: ^5.0.3
+  flutter_screenutil: ^5.8.2
+  font_awesome_flutter: ^10.4.0
+  fpdart: ^0.6.0
+  google_fonts: ^4.0.4
+  json_annotation: ^4.8.1
+  localization: ^2.1.0
+  mobx: ^2.2.0
+  retrofit: ^4.0.1
+
+dev_dependencies:
+  build_runner: ^2.4.4
+  flutter_lints: ^2.0.1
+  flutter_test:
+    sdk: flutter
+  json_serializable: ^6.7.0
+  mobx_codegen: ^2.3.0
+  mocktail: ^0.3.0
+  retrofit_generator: ^7.0.1
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/json/
+
+flutter_intl:
+  enabled: true

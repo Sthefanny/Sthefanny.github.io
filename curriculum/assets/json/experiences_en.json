@@ -1,0 +1,32 @@
+{
+    "experiences": [
+        {
+            "initialDate": "Mar/23",
+            "finalDate": "Present",
+            "jobTitle": "Flutter Developer",
+            "company": "Parcelex",
+            "description": "Responsible for creating the app from scratch, using Flutter and Dart, uploading to stores and keeping the app up to date.\nThe app is used for users to see their loans, pay installments and manage their accounts."
+        },
+        {
+            "initialDate": "Feb/21",
+            "finalDate": "Jan/23",
+            "jobTitle": "Flutter Developer",
+            "company": "Cíngulo",
+            "description": "Responsible for maintaining the app, creating new features and fixing bugs.\nI was also responsible for creating a package; I did an integration with iOS native widget; I changed the app's architecture so instead of using a global file with the instance of all classes, use dependency injection."
+        },
+        {
+            "initialDate": "Feb/20",
+            "finalDate": "Feb/21",
+            "jobTitle": "Flutter Developer",
+            "company": "LAR.app",
+            "description": "Responsible for the architecture and development of the app, using slidey, Flutter_Modular, MobX;\nI also did an integration with the Zendesk SDK with native code to implement a real-time chat in the app."
+        },
+        {
+            "initialDate": "Feb/19",
+            "finalDate": "Feb/20",
+            "jobTitle": "Full Stack Developer / Flutter Developer",
+            "company": "Blend IT Consulting",
+            "description": "Client: CEABS Serviços\nFeb - Jul: I added ReactJs to an application and performed maintenance on other applications.\nJul - Jan: I migrated a mobile application (Auto CEABS) from native languages to Flutter and created another one from scratch."
+        }
+    ]
+}
