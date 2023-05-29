@@ -34,7 +34,7 @@ jobs:
           git config --global user.email sthefannygonzaga@gmail.com
           git config --global user.name Sthefanny
           git status
-          git remote add origin https://${{secrets.token}}@github.com/Sthefanny/sthefanny.github.io.git
+          git remote add origin https://${{secrets.token}}@github.com/Sthefanny/sthefanny.github.io.git/curriculum
           git checkout -b gh-pages
           git add --all
           git commit -m "update"
