@@ -1,0 +1,18 @@
+{
+    "educations": [
+        {
+            "initialDate": "Mar/20",
+            "finalDate": "May/22",
+            "university": "Pontifícia Universidade Católica do Paraná",
+            "location": "Curitiba - PR - Brazil",
+            "course": "Postgraduate studies, App Development"
+        },
+        {
+            "initialDate": "Feb/06",
+            "finalDate": "Nov/10",
+            "university": "Universidade Castelo Branco (UCB)",
+            "location": "Rio de Janeiro - RJ - Brazil",
+            "course": "Bachelor's degree, Information Technology"
+        }
+    ]
+}

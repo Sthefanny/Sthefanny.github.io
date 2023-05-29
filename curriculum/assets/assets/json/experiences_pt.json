@@ -1,0 +1,32 @@
+{
+    "experiences": [
+        {
+            "initialDate": "Mar/23",
+            "finalDate": "Presente",
+            "jobTitle": "Desenvolvedora Flutter",
+            "company": "Parcelex",
+            "description": "Responsável por criar o aplicativo do zero, utilizando Flutter e Dart, subir nas lojas e manter o aplicativo atualizado.\nO aplicativo é utilizado para os usuários verem seus empréstimos, pagarem parcelas e gerenciar suas contas."
+        },
+        {
+            "initialDate": "Fev/21",
+            "finalDate": "Jan/23",
+            "jobTitle": "Desenvolvedora Flutter",
+            "company": "Cíngulo",
+            "description": "Responsável por manter o app, criar novas funcionalidades e corrigir bugs.\nFui responsável também por criar um package; fiz uma integração com widget nativo do iOS; fiz alteração da arquitetura do app para ao invés de usar um arquivo global com a instância de todas as classes, usar por injeção de dependência."
+        },
+        {
+            "initialDate": "Fev/20",
+            "finalDate": "Fev/21",
+            "jobTitle": "Desenvolvedora Flutter",
+            "company": "LAR.app",
+            "description": "Responsável pela arquitetura e desenvolvimento do app, utilizando slidy, Flutter_Modular, MobX;\nFiz também uma integração com a SDK do Zendesk com código nativo para implementação de um chat em tempo real no app."
+        },
+        {
+            "initialDate": "Fev/19",
+            "finalDate": "Fev/20",
+            "jobTitle": "Desenvolvedora Full Stack / Desenvolvedora Flutter",
+            "company": "Blend IT Consulting",
+            "description": "Cliente: CEABS Serviços\nFev - Jul: Adicionei ReactJs numa aplicação e realizei manutenções em outras aplicações.\nJul - Jan: Migrei um aplicativo mobile (Auto CEABS) de linguagens nativas para Flutter e criei outro do zero."
+        }
+    ]
+}

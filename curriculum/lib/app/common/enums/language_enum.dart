@@ -1,4 +1,0 @@
-enum LanguageEnum {
-  portuguese,
-  english,
-}
